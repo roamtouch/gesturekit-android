@@ -71,10 +71,10 @@ should be paused and resumed. For example
            this.gestureKit.onResume();
        }
        
-           @Override
-           public void onPause(){
+       @Override
+       public void onPause(){
            super.onPause();
-           gestures.onPause();
+           this.gestures.onPause();
        }
     }
 ```
