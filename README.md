@@ -108,7 +108,7 @@ This interface is defined as follows:
 
 ```java      
     public interface GKActionInterface {
-       public String getActionID();
+       public Vector getActionID();
        public void onGestureRecognized(Object... params);
     }
 ```
@@ -122,9 +122,12 @@ recognized.**
 
 ```java      
     public class MyAction implements GKActionInterface {
-       public String getActionID(){
-           return "PLAY";
+       public Vector getActionID() {
+        Vector idVector = new Vector();
+        idVector.add("PLAY");
+        return idVector;
        }
+
        public void onGestureRecognized(Object... params){
            Log.i("gesture PLAY recognized!");
          //Let's do something cool
