@@ -1,116 +1,179 @@
-# gesturekit-android
+# Android Addon
 
-> An Android library to recognize gestures on Android apps.
+An Android library to recognize advanced gestures on Android apps.
+
+* * *
 
 ## Compatibility
-- Android Froyo (2.2, API level 8) or higher.
 
-##Usage
-### Import jar files into your project.
-[Download](http://learn.gesturekit.com/download/download_file/GestureKit-android-1.0.2.jar) and add it to your project's build path.
-If you are working on Gingerbread MR1 or lower you must [download jackson library](http://jackson.codehaus.org/) and then include it in your build path.
+###
 
+Android Froyo (2.2, API level 8) or higher
 
-### Create GestureKit Service.
-Edit your `AndroidManifest.xml` and add the following lines of code.
-```java
-<service android:name="com.roamtouch.gesturekit.communications.GestureKitService"></service>
+* * *
+
+## Usage
+
+  
+
+### 1 - Import jar files into your project
+
+[Download](http://dev.gesturekit.com/download) and add it to your project's
+build path.
+
+If you are working on Gingerbread MR1 or lower you must download jackson
+library from [[url de jackson]](http://jackson.codehaus.org/) and then include
+it in your build path.
+
+##
+
+### 2 - GestureKit permissions
+
+Edit your AndroidManifest.xml and add the following permissions
+
+```java    
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
 
-### Instance a GestureKit object.
-You must create it using your host Activity and your `GID`. GestureKit object should be paused and resumed. For example:
-```java
-public class MyActivity extends Activity{
-    ...
-    private GestureKit gestureKit;
+##
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        ...
-        this.gestureKit = new GestureKit(this, [a valid GID]);
-        ...
-    }
-    
-    @Override
-    public void onResume(){
-        super.onResume();
-        gestures.onResume();
-    }
+### 3 - Create GestureKit Service
 
-    @Override
-    public void onPause(){
-        super.onPause();
-        gestures.onPause();
-    }
-}
+Edit your AndroidManifest.xml and add the following lines of code.
+
+```java        
+    <service android:name="com.roamtouch.gesturekit.communications.GestureKitService" ></service>
 ```
+##
 
-###  Setup GestureKit
-There two ways to bind gestures with actions: Matching Name Method (MNM) or `GKActionInterface MNM`: you should declare a method with the same name of the defined GestureKit method. For example, you define the `PLAY` method, then you should declare:
+### 4 - Instance a GestureKit object
 
-```java
-public void PLAY(){
-...
-}
+You must create it using your host Activity and your GID. GestureKit object
+should be paused and resumed. For example
+
+```java      
+    public class MyActivity extends Activity{
+       ...
+       private GestureKit gestureKit;
+       
+           @Override
+           public void onCreate(Bundle savedInstanceState) {
+           ...
+           this.gestureKit = new GestureKit(this, [a valid GID]);
+           ...
+       }
+       
+       @Override
+       public void onResume(){
+           super.onResume();
+           this.gestureKit.onResume();
+       }
+       
+           @Override
+           public void onPause(){
+           super.onPause();
+           gestures.onPause();
+       }
+    }
 ```
+  
+
+##
+
+### 5 - Setup GestureKit
+
+There two ways to bind gestures with actions: Matching Name Method (MNM) or
+GKActionInterface
+
+**MNM:** you should declare a method with the same name of the defined GestureKit method. For example, you define the "PLAY" method, then you should declare: 
+
+```java      
+    public void PLAY(){
+       ...
+    }
+```
+  
+
+##
 
 ### GKActionInterface
-Consists in declare an object implementing `GKActionInterface`. This interface is defined as follows:
-```java
-public interface GKActionInterface {
-    public String getActionID();
-    public void onGestureRecognized(Object... params);
-}
-```
-`getActionID` returns method name. 
-`onGestureRecognized` has the code to be called when the gesture is recognized.
 
-an example:
+### Consists in declare an object implementing
 
-```java
-public class MyAction implements GKActionInterface {
-    public String getActionID(){
-        return "PLAY";
+### GKActionInterface
+
+This interface is defined as follows:
+
+```java      
+    public interface GKActionInterface {
+       public String getActionID();
+       public void onGestureRecognized(Object... params);
     }
-    public void onGestureRecognized(Object... params){
-        Log.i("gesture PLAY recognized!");
-      //Let's do something cool
- }
-}
-```
-You should consider that GKActionInterface's methods will be called before MNMs, so if you declare a GKActionInterface method with the same name as a MNM, MNM will not be called.
-
-### Customizing GKVisor [optional].
-GestureKit has a default visor called `GestureKitVisor`, it's responsible of show GestueKit status as `loading`, `drawing gestures`, `ready` and `warning`. For example, you define the `PLAY` method, then you should declare:
-
-It can be replaced by your own Visor just implementing VisorInterface and then setting it to your GestureKit object calling setVisor method. VisorInterface is as follows:
-
-```java
-public interface VisorInterface {
-    public void proccessTouchEvent(MotionEvent event);
-    public void clear();
-    public void showErrorLogo();
-    public void showLoadingLogo();
-    public void showOkLogo();
-}
 ```
 
-`proccessTouchEvent` method is used to draw current's gesture shape, it should receive all motion events generated by your UI. clear method is called after a gesture is finished, is called either if it is recognized or not.
+getActionID **returns method name.**
 
-`showErrorLogo` method is called after an error or warning are occured. For example, if you are offline or your `GID` is not valid.
+onGestureRecognized **has the code to be called when the gesture is
+recognized.**
 
-`showLoadingLogo` method is called while a background process is executing. For example when GestrueKit is downloading data.
+**an example:**
 
-`showOkLogo` method is called every time GestureKit is ready.
+```java      
+    public class MyAction implements GKActionInterface {
+       public String getActionID(){
+           return "PLAY";
+       }
+       public void onGestureRecognized(Object... params){
+           Log.i("gesture PLAY recognized!");
+         //Let's do something cool
+    }
+   }
+```
+
+You should consider that GKActionInterface's methods will be called before
+MNMs, so if you declare a GKActionInterface method with the same name as a
+MNM, MNM will not be called.
+
+##
+
+### 6 - Customizing GKVisor [optional]
+
+GestureKit has a default visor called **GestureKitVisor**, it's responsible of
+show GestueKit status as "loading", "drawing gestures", "ready" and
+"warning".ample, you define the "PLAY" method, then you should declare:
+
+It can be replaced by your own Visor just implementing VisorInterface and then
+setting it to your GestureKit object calling setVisor method. VisorInterface
+is as follows:
+
+```java      
+    public interface VisorInterface {
+       public void proccessTouchEvent(MotionEvent event);
+       public void clear();
+       public void showErrorLogo();
+       public void showLoadingLogo();
+       public void showOkLogo();
+    }
+```
+
+**proccessTouchEvent** method is used to draw current's gesture shape, it should receive all motion events generated by your UI. clear method is called after a gesture is finished, is called either if it is recognized or not. 
+
+**showErrorLogo** method is called after an error or warning are occured. For example, if you are offline or your GID is not valid. 
+
+**showLoadingLogo** method is called while a background process is executing. For example when GestrueKit is downloading data. 
+
+**showOkLogo** method is called every time GestureKit is ready. 
 
 ## Maintained by
 [TODO]
 
-## Credits
+## Credits
 
 <img src="http://www.gesturekit.com/assets/img/roamtouch.png" width="200" alt="RoamTouch logo">
 
-## License
+## License
 Licensed under Apache v2 License.
 
 Copyright (c) 2014 [RoamTouch](http://github.com/RoamTouch).
