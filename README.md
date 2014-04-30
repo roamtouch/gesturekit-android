@@ -22,7 +22,7 @@ Android Froyo (2.2, API level 8) or higher
 build path.
 
 If you are working on Gingerbread MR1 or lower you must download jackson
-library from [[url de jackson]](http://jackson.codehaus.org/) and then include
+library from [[jackson url]](http://jackson.codehaus.org/) and then include
 it in your build path.
 
 ##
