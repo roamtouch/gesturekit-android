@@ -74,7 +74,7 @@ should be paused and resumed. For example
        @Override
        public void onPause(){
            super.onPause();
-           this.gestures.onPause();
+           this.gestureKit.onPause();
        }
     }
 ```
@@ -98,7 +98,9 @@ GKActionInterface
 
 ##
 
-### GKActionInterface
+### 6 - Creating a GestureAction plugin for GestureKit
+
+You can create your own Gesture Actions for Android, the class you create will listen for a gesture to be recognized and will interface via GKActionInterface.
 
 ### Consists in declare an object implementing
 
@@ -122,10 +124,8 @@ recognized.**
 
 ```java      
     public class MyAction implements GKActionInterface {
-       public Vector getActionID() {
-        Vector idVector = new Vector();
-        idVector.add("PLAY");
-        return idVector;
+       public String getActionID() {
+        return "PLAY";        
        }
 
        public void onGestureRecognized(Object... params){
@@ -141,7 +141,7 @@ MNM, MNM will not be called.
 
 ##
 
-### 6 - Customizing GKVisor [optional]
+### 7 - Customizing GKVisor [optional]
 
 GestureKit has a default visor called **GestureKitVisor**, it's responsible of
 show GestueKit status as "loading", "drawing gestures", "ready" and
@@ -170,7 +170,10 @@ is as follows:
 **showOkLogo** method is called every time GestureKit is ready. 
 
 ## Maintained by
-[TODO]
+- Jose Vigil (CEO at RoamTouch)
+- Twitter: [@JoseVigil](http://twitter.com/josevigil)
+- Web: [http://about.me/josevigil](http://about.me/josevigil)
+
 
 ## Credits
 
