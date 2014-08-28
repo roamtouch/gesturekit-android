@@ -63,19 +63,8 @@ should be paused and resumed. For example
            ...
            this.gestureKit = new GestureKit(this, [a valid GID]);
            ...
-       }
-       
-       @Override
-       public void onResume(){
-           super.onResume();
-           this.gestureKit.onResume();
-       }
-       
-       @Override
-       public void onPause(){
-           super.onPause();
-           this.gestureKit.onPause();
-       }
+       }   
+      
     }
 ```
   
@@ -95,6 +84,13 @@ GKActionInterface
     }
 ```
   
+**MNM:** If you have set a Gate parameter while creating the gesture provide a paramenter on your method like this.
+
+```java      
+    public void PLAY(String gate){
+       ...
+    }
+```
 
 ##
 
