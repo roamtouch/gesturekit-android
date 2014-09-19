@@ -1,3 +1,5 @@
+<img src="http://www.gesturekit.com/wp-content/uploads/2014/05/colash_largo.png" alt="GestureKit Technology">
+
 # Android Addon
 
 An Android library to recognize advanced gestures on Android apps.
