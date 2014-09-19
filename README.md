@@ -4,7 +4,11 @@
 
 An Android library to recognize advanced gestures on Android apps.
 
-* * *
+Please go to our [Download](http://www.gesturekit.com/learn/downloads/) page and download the last zip file for Android. 
+
+The zip file includes the jar library and a HelloWorld sample to play with also available at the [PLAY STORE](https://play.google.com/store/apps/details?id=com.roamtouch.gesturekit.gesturekithelloworld).
+
+* * * 
 
 ## Compatibility
 
